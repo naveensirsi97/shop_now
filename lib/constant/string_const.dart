@@ -10,17 +10,22 @@ const String nameHint = 'Please Input Name';
 const String password = 'Password';
 const String confirmPassword = 'Confirm Password';
 const String passwordHint = '********';
-const String forgetPassword = 'Foreget Password?';
+const String forgetPassword = 'Forget Password?';
 const String login = 'Log In';
-const String sigup = 'Sign Up';
+const String signup = 'Sign Up';
 const String createNewAccount = 'create a new account';
 const String alreadyAccount = 'Already have an account ? ';
 const String loginWith = 'Log in with';
+const String loggedIn = 'Logged in successfully';
+const String loggedOut = 'Logged out successfully';
 const String privacyPolicy = ' Privacy Policy';
 const String termAndCondition = 'Term and Condition ';
 
 // home string
-const home = 'Home', category = 'Categories', cart = 'Cart', account = 'Account';
+const home = 'Home',
+    category = 'Categories',
+    cart = 'Cart',
+    account = 'Account';
 
 // homeScreen string
 
@@ -40,11 +45,27 @@ const searchAnythings = 'Search anything...',
     girlsDress = 'Girls Dress',
     bestSellers = 'Best Sellers';
 
-const menClothingFashion ='Men Clothing & Fashion',
-    compAccess ='Computer & Accessories',
+const menClothingFashion = 'Men Clothing & Fashion',
+    compAccess = 'Computer & Accessories',
     autoMobile = 'Automobile',
-    kidToys ='Kids & Toys',
-    sports ='Sports',
+    kidToys = 'Kids & Toys',
+    sports = 'Sports',
     jewelery = 'Jewelery',
-    cellPhone ='CellPhone & Tab',
-    furniture ='Furniture';
+    cellPhone = 'CellPhone & Tab',
+    furniture = 'Furniture';
+
+//detail item
+
+const video = 'Video',
+    reviews = 'Reviews',
+    sellerPolicy = 'Seller Policy',
+    returnPolicy = 'Return Policy',
+    supportPolicy = 'Support Policy';
+
+// profile
+const language = 'Language',
+    editProfile = 'Edit Profile',
+    wishList = 'My WishList',
+    orders = 'My Orders',
+    messages = 'Messages',
+    location = 'Location';

@@ -9,44 +9,50 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
-   const Home({super.key});
-
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     var controller = Get.put(HomeController());
 
     var navBarItem = [
-      const BottomNavigationBarItem(icon: Icon(Icons.home),label: home),
-      const BottomNavigationBarItem(icon: Icon(Icons.category),label: category),
-      const BottomNavigationBarItem(icon: Icon(Icons.shopping_cart),label: cart),
-      const BottomNavigationBarItem(icon: Icon(Icons.account_box),label: account)
+      const BottomNavigationBarItem(icon: Icon(Icons.home), label: home),
+      const BottomNavigationBarItem(
+          icon: Icon(Icons.category), label: category),
+      const BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_cart), label: cart),
+      const BottomNavigationBarItem(
+          icon: Icon(Icons.account_box), label: account)
     ];
     var navBody = [
-     const HomeScreen(),
+      const HomeScreen(),
       const CategoryScreen(),
       const CartScreen(),
       const ProfileScreen()
-
     ];
     return Scaffold(
-      bottomNavigationBar: Obx(()=>
-        BottomNavigationBar(
+      bottomNavigationBar: Obx(
+        () => BottomNavigationBar(
           currentIndex: controller.currentNavIndex.value,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: redColor,
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+          selectedLabelStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
           backgroundColor: Colors.white,
           items: navBarItem,
-        onTap: (value){
+          onTap: (value) {
             controller.currentNavIndex.value = value;
-        },
+          },
         ),
       ),
       body: Column(
         children: [
-          Obx(()=> Expanded(child: navBody.elementAt(controller.currentNavIndex.value),)),
+          Obx(() => Expanded(
+                child: navBody.elementAt(
+                  controller.currentNavIndex.value,
+                ),
+              )),
         ],
       ),
     );

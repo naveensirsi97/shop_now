@@ -12,17 +12,21 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       color: Colors.white,
       child: SafeArea(
         child: Column(
           children: [
             TextFormField(
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
+                  isDense: true,
                   hintText: searchAnythings,
-                  suffixIcon: Icon(Icons.search),
+                  suffixIcon: const Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   filled: true,
-                  fillColor: Colors.black12),
+                  fillColor: Colors.white60),
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -100,8 +104,8 @@ class HomeScreen extends StatelessWidget {
                           (index) => homeButton(
                                 onPressed: () {},
                                 height:
-                                    MediaQuery.of(context).size.height * 0.15,
-                                width: MediaQuery.of(context).size.width / 4.0,
+                                    MediaQuery.of(context).size.height * 0.1,
+                                width: MediaQuery.of(context).size.width / 3.5,
                                 title: index == 0
                                     ? topCategories
                                     : index == 1
@@ -149,7 +153,7 @@ class HomeScreen extends StatelessWidget {
                                           MediaQuery.of(context).size.height *
                                               0.1,
                                       width: MediaQuery.of(context).size.width /
-                                          2.5,
+                                          2.0,
                                       title: index == 0
                                           ? womenClothing
                                           : index == 1
@@ -181,7 +185,7 @@ class HomeScreen extends StatelessWidget {
                                           MediaQuery.of(context).size.height *
                                               0.1,
                                       width: MediaQuery.of(context).size.width /
-                                          2.5,
+                                          2.0,
                                       title: index == 0
                                           ? mobilePhone
                                           : index == 1
@@ -210,7 +214,9 @@ class HomeScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       width: double.infinity,
-                      decoration: const BoxDecoration(color: redColor),
+                      decoration: BoxDecoration(
+                          color: redColor,
+                          borderRadius: BorderRadius.circular(12)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -277,7 +283,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         10.heightBox,
                         GridView.builder(
-                         // physics: const NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: 8,
                           shrinkWrap: true,
                           gridDelegate:
@@ -285,7 +291,7 @@ class HomeScreen extends StatelessWidget {
                                   crossAxisCount: 2,
                                   mainAxisSpacing: 8,
                                   crossAxisSpacing: 8,
-                                  mainAxisExtent: 250),
+                                  mainAxisExtent: 220),
                           itemBuilder: (context, index) {
                             return Card(
                               child: Column(

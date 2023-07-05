@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatelessWidget {
@@ -6,6 +5,16 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(color: Colors.lightBlue,);
+    return const Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+          child: Text(
+        'No Cart Available',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      )),
+    );
   }
 }

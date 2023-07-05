@@ -31,7 +31,7 @@ var categoryList = [
   furniture
 ];
 
-var categoryImageList =[
+var categoryImageList = [
   'assets/images/girlsDress.jpg',
   'assets/images/tShirt.jpg',
   'assets/images/computer.jpg',
@@ -41,4 +41,21 @@ var categoryImageList =[
   'assets/images/jewellery.jpg',
   'assets/images/mobile.jpg',
   'assets/images/furniture.jpg',
+];
+
+var itemDetailsButtonList = [
+  video,
+  reviews,
+  sellerPolicy,
+  returnPolicy,
+  privacyPolicy,
+  supportPolicy
+];
+
+var profileButtonList = [orders, wishList, messages];
+
+var profileButtonIcon = [
+  'assets/images/myOrder.png',
+  'assets/images/myOrder.png',
+  'assets/images/messages.png',
 ];

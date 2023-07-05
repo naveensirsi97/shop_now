@@ -1,10 +1,12 @@
 import 'package:emart_app/constant/color_const.dart';
+import 'package:emart_app/constant/firebase_consts.dart';
 import 'package:emart_app/constant/string_const.dart';
+import 'package:emart_app/controller/auth_controller.dart';
+import 'package:emart_app/ui/screen/home_screen/home.dart';
 import 'package:emart_app/widget/button.dart';
 import 'package:emart_app/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -15,12 +17,17 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-
   bool? isCheck = false;
+  var controller = Get.put(AuthController());
+  var nameController = TextEditingController();
+  var passwordController = TextEditingController();
+  var emailController = TextEditingController();
+  var confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Column(
@@ -28,13 +35,13 @@ class _SignupScreenState extends State<SignupScreen> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 250,
+                height: 350,
                 color: redColor,
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      30.heightBox,
+                      80.heightBox,
                       Container(
                         height: 100,
                         width: 100,
@@ -61,9 +68,9 @@ class _SignupScreenState extends State<SignupScreen> {
             ],
           ),
           Positioned(
-            top: 180,
-            left: 50,
-            right: 50,
+            top: 250,
+            left: 20,
+            right: 20,
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -75,94 +82,147 @@ class _SignupScreenState extends State<SignupScreen> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16)),
                   child: Expanded(
-                    child: Column(
-                      children: [
-                        customTextField(hint: nameHint, title: name),
-                        customTextField(hint: emailHint, title: email),
-                        customTextField(hint: passwordHint, title: password),
-                        customTextField(
-                            hint: passwordHint, title: confirmPassword),
-                        5.heightBox,
-                        Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                                onPressed: () {},
-                                child: const Text(forgetPassword))),
-                        5.heightBox,
-                        Row(
-                          children: [
-                            Checkbox(
-                              checkColor: Colors.white,
-                              activeColor: Colors.red,
-                              value: isCheck,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  isCheck= newValue;
-                                });
-
-                              },
-                            ),
-                            10.widthBox,
-                            Expanded(
-                              child: RichText(
-                                text: const TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: 'I agree to the ',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey),
-                                    ),
-                                    TextSpan(
-                                      text: termAndCondition,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.red),
-                                    ),
-                                    TextSpan(
-                                      text: '&',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey),
-                                    ),
-                                    TextSpan(
-                                      text: privacyPolicy,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.red),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        5.heightBox,
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: button(
-                            title: 'Sign Up',
-                            onPressed: () {},
-                            color: isCheck== true ? redColor : Colors.black12,
-                            textColor: Colors.white,
+                    child: Obx(
+                      () => Column(
+                        children: [
+                          customTextField(
+                            hint: nameHint,
+                            title: name,
+                            controller: nameController,
+                            isPass: false,
                           ),
-                        ),
-                        5.heightBox,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(alreadyAccount),
-                            TextButton(
-                                onPressed: () {
-                                  Get.back();
+                          customTextField(
+                            hint: emailHint,
+                            title: email,
+                            controller: emailController,
+                            isPass: false,
+                          ),
+                          customTextField(
+                            hint: passwordHint,
+                            title: password,
+                            controller: passwordController,
+                            isPass: false,
+                          ),
+                          customTextField(
+                            hint: passwordHint,
+                            title: confirmPassword,
+                            controller: confirmPasswordController,
+                            isPass: false,
+                          ),
+                          5.heightBox,
+                          Row(
+                            children: [
+                              Checkbox(
+                                checkColor: Colors.white,
+                                activeColor: Colors.red,
+                                value: isCheck,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    isCheck = newValue;
+                                  });
                                 },
-                                child: const Text(
-                                  login,
-                                  style: TextStyle(color: redColor,fontSize: 16,fontWeight: FontWeight.bold),
-                                ))
-                          ],
-                        ),
-                      ],
+                              ),
+                              10.widthBox,
+                              Expanded(
+                                child: RichText(
+                                  text: const TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'I agree to the ',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey),
+                                      ),
+                                      TextSpan(
+                                        text: termAndCondition,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red),
+                                      ),
+                                      TextSpan(
+                                        text: '&',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey),
+                                      ),
+                                      TextSpan(
+                                        text: privacyPolicy,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          5.heightBox,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: 30,
+                            child: controller.isLoading.value
+                                ? const CircularProgressIndicator(
+                                    valueColor:
+                                        AlwaysStoppedAnimation(redColor),
+                                  )
+                                : button(
+                                    title: signup,
+                                    color: isCheck == true
+                                        ? redColor
+                                        : Colors.black12,
+                                    textColor: Colors.white,
+                                    onPressed: () async {
+                                      controller.isLoading(true);
+                                      if (isCheck != false) {
+                                        try {
+                                          await controller
+                                              .signupMethod(
+                                                  context: context,
+                                                  email: emailController.text,
+                                                  password:
+                                                      passwordController.text)
+                                              .then((value) {
+                                            return controller.storeUserData(
+                                                email: emailController.text,
+                                                password:
+                                                    passwordController.text,
+                                                name: nameController.text);
+                                          }).then((value) {
+                                            VxToast.show(context,
+                                                msg: loggedIn);
+                                            Get.offAll(() => const Home());
+                                          });
+                                        } catch (e) {
+                                          auth.signOut();
+                                          VxToast.show(context,
+                                              msg: e.toString());
+                                          controller.isLoading(false);
+                                        }
+                                      }
+                                    },
+                                  ),
+                          ),
+                          5.heightBox,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(alreadyAccount),
+                              TextButton(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  child: const Text(
+                                    login,
+                                    style: TextStyle(
+                                        color: redColor,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ))
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

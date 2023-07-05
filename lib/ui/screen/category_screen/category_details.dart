@@ -20,7 +20,7 @@ class CategoryDetails extends StatelessWidget {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 120,
+                height: 350,
                 color: redColor,
                 child: Center(
                   child: Column(
@@ -35,6 +35,7 @@ class CategoryDetails extends StatelessWidget {
                         ),
                       ),
                       SingleChildScrollView(
+                        physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: List.generate(
@@ -51,7 +52,8 @@ class CategoryDetails extends StatelessWidget {
                                         child: Text(
                                       'Baby Cloth',
                                       style: TextStyle(
-                                          fontWeight: FontWeight.w300),
+                                        fontWeight: FontWeight.w300,
+                                      ),
                                     )),
                                   )),
                         ),
@@ -68,28 +70,33 @@ class CategoryDetails extends StatelessWidget {
               right: 0,
               child: Expanded(
                 child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
                   child: Column(
                     children: [
-                      120.heightBox,
+                      150.heightBox,
                       Container(
                         color: Colors.white,
                         child: GridView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: 9,
                             shrinkWrap: true,
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    mainAxisSpacing: 8,
-                                    crossAxisSpacing: 8,
-                                    mainAxisExtent: 250),
-                            itemBuilder: (context,index){
-                              return  InkWell(
-                                onTap: (){
-                                  Get.to(() => const ItemDetails(title: "Product Details"));
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 8,
+                              crossAxisSpacing: 8,
+                              mainAxisExtent: 250,
+                            ),
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  Get.to(() => const ItemDetails(
+                                      title: "Product Details"));
                                 },
                                 child: Card(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Image.asset(
                                         categoryImageList[index],
@@ -103,11 +110,11 @@ class CategoryDetails extends StatelessWidget {
                                         child: Text(
                                           categoryList[index],
                                           style: const TextStyle(
-                                              color: Colors.redAccent,
-                                              fontWeight: FontWeight.bold),
+                                            color: Colors.redAccent,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
-
                                     ],
                                   ),
                                 ),
