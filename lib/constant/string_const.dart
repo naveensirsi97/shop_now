@@ -13,6 +13,7 @@ const String passwordHint = '********';
 const String forgetPassword = 'Forget Password?';
 const String login = 'Log In';
 const String signup = 'Sign Up';
+const String change = 'Change';
 const String createNewAccount = 'create a new account';
 const String alreadyAccount = 'Already have an account ? ';
 const String loginWith = 'Log in with';

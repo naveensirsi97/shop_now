@@ -11,12 +11,14 @@ class ItemDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: redColor,
+        //backgroundColor: Colors.transparent,
         title: Text(
           title!,
           style:
-              const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
         ),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
@@ -57,7 +59,8 @@ class ItemDetails extends StatelessWidget {
                     20.heightBox,
                     const Text(
                       'Dummy Item',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                     10.heightBox,
                     VxRating(
@@ -243,47 +246,52 @@ class ItemDetails extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       children: List.generate(
-                          itemDetailsButtonList.length,
-                          (index) => Card(
-                            child: Container(
-                              margin: const EdgeInsets.all(8),
-                              child:  ListTile(
-                                title: Text(
-                                  itemDetailsButtonList[index],
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                trailing: const Icon(Icons.arrow_forward),
+                        itemDetailsButtonList.length,
+                        (index) => Card(
+                          child: Container(
+                            margin: const EdgeInsets.all(8),
+                            child: ListTile(
+                              title: Text(
+                                itemDetailsButtonList[index],
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                               ),
+                              trailing: const Icon(Icons.arrow_forward),
                             ),
                           ),
+                        ),
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(8),
                       color: Colors.white,
-                      child:  Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Product You May Also Likes', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                          const Text(
+                            'Product You May Also Likes',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
                           10.heightBox,
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               children: List.generate(
                                 6,
-                                    (index) => Card(
-                                      child: Container(
-                                  margin:
-                                  const EdgeInsets.symmetric(horizontal: 4),
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
+                                (index) => Card(
+                                  child: Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 4),
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
                                         color: Colors.white,
-                                        borderRadius: BorderRadius.circular(16)),
-                                  child: Column(
+                                        borderRadius:
+                                            BorderRadius.circular(16)),
+                                    child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Image.asset(
                                           'assets/images/mobile.jpg',
@@ -305,13 +313,12 @@ class ItemDetails extends StatelessWidget {
                                               fontWeight: FontWeight.bold),
                                         )
                                       ],
+                                    ),
                                   ),
                                 ),
-                                    ),
                               ),
                             ),
                           ),
-
                         ],
                       ),
                     )
@@ -325,8 +332,11 @@ class ItemDetails extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              onPressed: (){},
-              child: const Text('Add To Card',style: TextStyle(color: Colors.white),),
+              onPressed: () {},
+              child: const Text(
+                'Add To Card',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           )
         ],
