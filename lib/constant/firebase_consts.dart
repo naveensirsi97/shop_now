@@ -10,3 +10,5 @@ User? currentUser = auth.currentUser;
 // collection
 
 const usersCollection = 'users';
+const productsCollection = 'products';
+const cartCollection = 'cart';

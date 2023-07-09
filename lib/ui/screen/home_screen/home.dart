@@ -5,6 +5,7 @@ import 'package:emart_app/ui/screen/cart_screen/cart_screen.dart';
 import 'package:emart_app/ui/screen/category_screen/category_screen.dart';
 import 'package:emart_app/ui/screen/home_screen/home_screen.dart';
 import 'package:emart_app/ui/screen/profile_screen/profile_screen.dart';
+import 'package:emart_app/widget/exit_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,30 +31,39 @@ class Home extends StatelessWidget {
       const CartScreen(),
       const ProfileScreen()
     ];
-    return Scaffold(
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          currentIndex: controller.currentNavIndex.value,
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: redColor,
-          selectedLabelStyle: const TextStyle(
-            fontWeight: FontWeight.bold,
+    return WillPopScope(
+      onWillPop: () async {
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) => exitDialog(context));
+        return false;
+      },
+      child: Scaffold(
+        bottomNavigationBar: Obx(
+          () => BottomNavigationBar(
+            currentIndex: controller.currentNavIndex.value,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: redColor,
+            selectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+            backgroundColor: Colors.white,
+            items: navBarItem,
+            onTap: (value) {
+              controller.currentNavIndex.value = value;
+            },
           ),
-          backgroundColor: Colors.white,
-          items: navBarItem,
-          onTap: (value) {
-            controller.currentNavIndex.value = value;
-          },
         ),
-      ),
-      body: Column(
-        children: [
-          Obx(() => Expanded(
-                child: navBody.elementAt(
-                  controller.currentNavIndex.value,
-                ),
-              )),
-        ],
+        body: Column(
+          children: [
+            Obx(() => Expanded(
+                  child: navBody.elementAt(
+                    controller.currentNavIndex.value,
+                  ),
+                )),
+          ],
+        ),
       ),
     );
   }
