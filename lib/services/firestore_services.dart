@@ -43,4 +43,20 @@ class FirestoreServices {
         .snapshots();
   }
 
+  //delete document
+
+  static deleteDocument(docId) {
+    return fireStore.collection(cartCollection).doc(docId).delete();
+  }
+
+  //get all chat messages
+
+  static getChatMessages(docId) {
+    return fireStore
+        .collection(chatsCollection)
+        .doc(docId)
+        .collection(messagesCollection)
+        .orderBy('created_on', descending: true)
+        .snapshots();
+  }
 }

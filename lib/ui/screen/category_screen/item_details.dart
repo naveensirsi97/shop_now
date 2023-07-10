@@ -1,6 +1,7 @@
 import 'package:emart_app/constant/color_const.dart';
 import 'package:emart_app/constant/list.dart';
 import 'package:emart_app/controller/product_controller.dart';
+import 'package:emart_app/ui/screen/chat_screen/chat_screen.dart';
 import 'package:emart_app/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -135,7 +136,15 @@ class ItemDetails extends StatelessWidget {
                               radius: 20,
                               backgroundColor: Colors.white,
                               child: Icon(Icons.message),
-                            )
+                            ).onTap(() {
+                              Get.to(
+                                () => const ChatScreen(),
+                                arguments: [
+                                  data['p_seller'],
+                                  data['vendor_id'],
+                                ],
+                              );
+                            })
                           ],
                         ),
                       ),
@@ -172,8 +181,10 @@ class ItemDetails extends StatelessWidget {
                                                         horizontal: 4))
                                                 .make()
                                                 .onTap(() {
-                                              controller
-                                                  .changeColorIndex(index);
+                                              // controller
+                                              //     .changeColorIndex(index);
+                                              controller.colorIndex.value =
+                                                  index;
                                             }),
                                             Visibility(
                                                 visible: index ==
@@ -386,30 +397,39 @@ class ItemDetails extends StatelessWidget {
               height: 50,
               width: MediaQuery.of(context).size.width,
               child: button(
-                  title: 'Add To Card',
-                  color: redColor,
-                  textColor: Colors.white,
-                  onPressed: () {
+                title: 'Add To Card',
+                color: redColor,
+                textColor: Colors.white,
+                onPressed: () {
+                  // controller.addToCart(
+                  //     color: data['p_colors'][controller.colorIndex.value],
+                  //     context: context,
+                  //     img: data['p_imgs'][0],
+                  //     qty: controller.quantity.value,
+                  //     sellerName: data['p_seller'],
+                  //     title: data['p_name'],
+                  //     tPrice: controller.totalPrice.value);
+                  // VxToast.show(context, msg: 'Added to Cart');
+                  //    print('data[p_colors]: ${data['p_colors']}');
+                  //     print('colorIndex: ${controller.colorIndex.value}');
+                  if (data['p_colors'] != null &&
+                      controller.colorIndex.value < data['p_colors'].length) {
                     controller.addToCart(
-                        color: data['p_color'][controller.colorIndex.value],
-                        context: context,
-                        img: data['p_imgs'][0],
-                        qty: controller.quantity.value,
-                        sellerName: data['p_seller'],
-                        title: data['p_name'],
-                        tPrice: controller.totalPrice.value);
+                      color: data['p_colors'][controller.colorIndex.value],
+                      context: context,
+                      img: data['p_imgs'][0],
+                      qty: controller.quantity.value,
+                      sellerName: data['p_seller'],
+                      title: data['p_name'],
+                      tPrice: controller.totalPrice.value,
+                    );
                     VxToast.show(context, msg: 'Added to Cart');
-                  }),
-              //  ElevatedButton(
-              //   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              //   onPressed: () {
-              //
-              //   },
-              //   child: const Text(
-              //     'Add To Card',
-              //     style: TextStyle(color: Colors.white),
-              //   ),
-              // ),
+                  } else {
+                    // Handle error when color index is out of range or data['p_colors'] is null
+                    print('Invalid color index or null ${data['p_colors']}');
+                  }
+                },
+              ),
             )
           ],
         ),

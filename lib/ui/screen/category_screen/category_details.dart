@@ -558,7 +558,7 @@ class CategoryDetails extends StatelessWidget {
                           onTap: () {
                             Get.to(() => ItemDetails(
                                   title: product['p_name'] as String,
-                                  data: product.data(),
+                                  data: product.data(), //!
                                 ));
                           },
                           child: Card(
