@@ -56,7 +56,26 @@ class FirestoreServices {
         .collection(chatsCollection)
         .doc(docId)
         .collection(messagesCollection)
-        .orderBy('created_on', descending: true)
+        .orderBy('created_on', descending: false)
         .snapshots();
+  }
+
+  static getAllOrders() {
+    return fireStore
+        .collection(ordersCollection)
+        .where('order_by', isEqualTo: auth.currentUser!.uid)
+        .snapshots();
+  }
+
+  static getWishList() {
+    return fireStore
+        .collection(productsCollection)
+        .where('p_wishList', arrayContains: auth.currentUser!.uid)
+        .snapshots();
+  }
+
+  static getAllMessages() {
+    return fireStore.collection(chatsCollection)
+      ..where('fromId', isEqualTo: auth.currentUser!.uid).snapshots();
   }
 }

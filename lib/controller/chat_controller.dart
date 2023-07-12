@@ -26,6 +26,8 @@ class ChatController extends GetxController {
   var isLoading = false.obs;
 
   getChatId() async {
+    isLoading(true);
+
     await chats
         .where('users', isEqualTo: {friendId: null, currentId: null})
         .limit(1)
@@ -49,6 +51,7 @@ class ChatController extends GetxController {
             });
           }
         });
+    isLoading(false);
   }
 
   sendMsg(String msg) async {

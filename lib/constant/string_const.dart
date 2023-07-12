@@ -70,3 +70,7 @@ const language = 'Language',
     orders = 'My Orders',
     messages = 'Messages',
     location = 'Location';
+
+// payment method
+
+const paypal = 'Paypal', debitCard = ' Debit Card', cod = 'Cash On Delivery';

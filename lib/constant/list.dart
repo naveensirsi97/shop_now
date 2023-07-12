@@ -59,3 +59,10 @@ var profileButtonIcon = [
   'assets/images/myOrder.png',
   'assets/images/messages.png',
 ];
+
+var paymentMethodImg = [
+  'assets/images/paypal.png',
+  'assets/images/debitCard.jpg',
+  'assets/images/cashOn.jpg',
+];
+var paymentMethods = [paypal, debitCard, cod];

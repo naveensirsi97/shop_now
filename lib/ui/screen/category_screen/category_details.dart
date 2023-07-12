@@ -553,12 +553,13 @@ class CategoryDetails extends StatelessWidget {
                         mainAxisExtent: 250,
                       ),
                       itemBuilder: (context, index) {
-                        var product = products[index];
+                        //   var product = products[index];
                         return InkWell(
                           onTap: () {
+                            controller.checkIfFav(products[index]);
                             Get.to(() => ItemDetails(
-                                  title: product['p_name'] as String,
-                                  data: product.data(), //!
+                                  title: '${products[index]['p_name']}',
+                                  data: products[index].data(), //!
                                 ));
                           },
                           child: Card(
@@ -566,7 +567,7 @@ class CategoryDetails extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Image.network(
-                                  product['p_imgs'][0] as String,
+                                  products[index]['p_imgs'][0] as String,
                                   height: 200,
                                   width: 200,
                                   fit: BoxFit.cover,
@@ -575,7 +576,7 @@ class CategoryDetails extends StatelessWidget {
                                 Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    product['p_name'] as String,
+                                    products[index]['p_name'] as String,
                                     style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w700,
@@ -586,7 +587,7 @@ class CategoryDetails extends StatelessWidget {
                                 Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    '${product['p_price']}'.numCurrency,
+                                    '${products[index]['p_price']}'.numCurrency,
                                     style: const TextStyle(
                                       color: Colors.redAccent,
                                       fontWeight: FontWeight.bold,

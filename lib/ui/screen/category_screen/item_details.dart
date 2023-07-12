@@ -11,7 +11,11 @@ class ItemDetails extends StatelessWidget {
   final String? title;
   final dynamic data;
 
-  const ItemDetails({super.key, required this.title, this.data});
+  const ItemDetails({
+    super.key,
+    required this.title,
+    this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +44,25 @@ class ItemDetails extends StatelessWidget {
           ),
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
-            IconButton(
-                onPressed: () {}, icon: const Icon(Icons.favorite_outline)),
+            Obx(
+              () => IconButton(
+                onPressed: () {
+                  if (controller.isFav.value) {
+                    controller.removeFromWishList(data.id, context);
+                    //   controller.isFav(false);
+                  } else {
+                    controller.addToWishList(data.id, context);
+                    //    controller.isFav(true);
+                  }
+                },
+                icon: Icon(
+                  Icons.favorite_outlined,
+                  color: controller.isFav.value
+                      ? Colors.orangeAccent
+                      : Colors.grey,
+                ),
+              ),
+            ),
           ],
         ),
         body: Column(
@@ -418,6 +439,7 @@ class ItemDetails extends StatelessWidget {
                       color: data['p_colors'][controller.colorIndex.value],
                       context: context,
                       img: data['p_imgs'][0],
+                      vendorID: data['vendor_id'],
                       qty: controller.quantity.value,
                       sellerName: data['p_seller'],
                       title: data['p_name'],
