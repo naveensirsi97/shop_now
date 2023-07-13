@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart_app/constant/color_const.dart';
+import 'package:emart_app/constant/firebase_consts.dart';
 import 'package:emart_app/services/firestore_services.dart';
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class WishListScreen extends StatelessWidget {
   const WishListScreen({super.key});
@@ -29,13 +31,51 @@ class WishListScreen extends StatelessWidget {
           } else if (snapshot.data!.docs.isEmpty) {
             return const Center(
               child: Text(
-                'No WishList Yet!',
+                'No Item In WishList',
                 style:
                     TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
               ),
             );
           } else {
-            return Container();
+            var data = snapshot.data!.docs;
+            return Column(
+              children: [
+                ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        leading: Image.network(
+                          '${data[index]['p_imgs'][0]}',
+                          width: 80,
+                          fit: BoxFit.cover,
+                        ),
+                        title: Text(
+                          '${data[index]['p_name']}',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 16),
+                        ),
+                        subtitle: Text(
+                          '${data[index]['p_price']}'.numCurrency,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w500, color: Colors.red),
+                        ),
+                        trailing: const Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        ).onTap(() {
+                          fireStore
+                              .collection(productsCollection)
+                              .doc(data[index].id)
+                              .set({
+                            'p_wishList':
+                                FieldValue.arrayRemove([auth.currentUser!.uid])
+                          }, SetOptions(merge: true));
+                        }),
+                      );
+                    }),
+              ],
+            );
           }
         },
       ),

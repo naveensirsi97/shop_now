@@ -145,29 +145,67 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   5.heightBox,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      profileCard(
-                        count: data['cart_count'],
-                        title: 'in your cart',
-                        width: MediaQuery.of(context).size.width / 3.5,
-                        onPressed: () {},
-                      ),
-                      profileCard(
-                        count: data['wishList_count'],
-                        title: 'in your wishList',
-                        width: MediaQuery.of(context).size.width / 3.0,
-                        onPressed: () {},
-                      ),
-                      profileCard(
-                        count: data['order_count'],
-                        title: 'your order',
-                        width: MediaQuery.of(context).size.width / 3.5,
-                        onPressed: () {},
-                      )
-                    ],
-                  ),
+
+                  FutureBuilder(
+                      future: FirestoreServices.getCounts(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation(redColor),
+                            ),
+                          );
+                        } else {
+                          var countData = snapshot.data;
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              profileCard(
+                                count: countData[0].toString(),
+                                title: 'in your cart',
+                                width: MediaQuery.of(context).size.width / 3.5,
+                                onPressed: () {},
+                              ),
+                              profileCard(
+                                count: countData[1].toString(),
+                                title: 'in your wishList',
+                                width: MediaQuery.of(context).size.width / 3.0,
+                                onPressed: () {},
+                              ),
+                              profileCard(
+                                count: countData[2].toString(),
+                                title: 'your order',
+                                width: MediaQuery.of(context).size.width / 3.5,
+                                onPressed: () {},
+                              )
+                            ],
+                          );
+                        }
+                      }),
+
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: [
+                  //     profileCard(
+                  //       count: data['cart_count'],
+                  //       title: 'in your cart',
+                  //       width: MediaQuery.of(context).size.width / 3.5,
+                  //       onPressed: () {},
+                  //     ),
+                  //     profileCard(
+                  //       count: data['wishList_count'],
+                  //       title: 'in your wishList',
+                  //       width: MediaQuery.of(context).size.width / 3.0,
+                  //       onPressed: () {},
+                  //     ),
+                  //     profileCard(
+                  //       count: data['order_count'],
+                  //       title: 'your order',
+                  //       width: MediaQuery.of(context).size.width / 3.5,
+                  //       onPressed: () {},
+                  //     )
+                  //   ],
+                  // ),
                   20.heightBox,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

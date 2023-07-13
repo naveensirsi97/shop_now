@@ -75,7 +75,40 @@ class FirestoreServices {
   }
 
   static getAllMessages() {
-    return fireStore.collection(chatsCollection)
-      ..where('fromId', isEqualTo: auth.currentUser!.uid).snapshots();
+    return fireStore
+        .collection(chatsCollection)
+        .where('fromId', isEqualTo: auth.currentUser!.uid)
+        .snapshots();
+  }
+
+  static getCounts() async {
+    var res = await Future.wait([
+      fireStore
+          .collection(cartCollection)
+          .where('added_by', isEqualTo: auth.currentUser!.uid)
+          .get()
+          .then((value) {
+        return value.docs.length;
+      }),
+      fireStore
+          .collection(productsCollection)
+          .where('p_wishList', arrayContains: auth.currentUser!.uid)
+          .get()
+          .then((value) {
+        return value.docs.length;
+      }),
+      fireStore
+          .collection(ordersCollection)
+          .where('order_by', isEqualTo: auth.currentUser!.uid)
+          .get()
+          .then((value) {
+        return value.docs.length;
+      })
+    ]);
+    return res;
+  }
+
+  static allProducts() {
+    return fireStore.collection(productsCollection).snapshots();
   }
 }

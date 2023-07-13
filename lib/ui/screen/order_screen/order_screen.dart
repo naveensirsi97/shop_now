@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart_app/constant/color_const.dart';
 import 'package:emart_app/services/firestore_services.dart';
+import 'package:emart_app/ui/screen/order_screen/order_details.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class OrdersScreen extends StatelessWidget {
@@ -57,7 +59,11 @@ class OrdersScreen extends StatelessWidget {
                           color: Colors.blue, fontWeight: FontWeight.w400),
                     ),
                     trailing: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => OrderDetails(
+                              data: data[index].data(),
+                            ));
+                      },
                       icon: const Icon(
                         Icons.arrow_forward_ios_outlined,
                         color: Colors.grey,

@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart_app/constant/color_const.dart';
 import 'package:emart_app/services/firestore_services.dart';
+import 'package:emart_app/ui/screen/chat_screen/chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MessagesScreen extends StatelessWidget {
   const MessagesScreen({super.key});
@@ -11,7 +13,7 @@ class MessagesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.red,
         title: const Text(
           'My Message',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
@@ -35,7 +37,48 @@ class MessagesScreen extends StatelessWidget {
               ),
             );
           } else {
-            return Container();
+            var data = snapshot.data!.docs;
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Card(
+                          child: ListTile(
+                            onTap: () {
+                              Get.to(() => const ChatScreen(), arguments: [
+                                data[index]['friend_name'],
+                                data[index]['toId'],
+                              ]);
+                            },
+                            leading: const CircleAvatar(
+                              backgroundColor: redColor,
+                              child: Icon(
+                                Icons.person,
+                                color: Colors.white,
+                              ),
+                            ),
+                            title: Text(
+                              '${data[index]['friend_name']}',
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black87),
+                            ),
+                            subtitle: Text(
+                              '${data[index]['last_msg']}',
+                              style: const TextStyle(color: Colors.grey),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                ],
+              ),
+            );
           }
         },
       ),

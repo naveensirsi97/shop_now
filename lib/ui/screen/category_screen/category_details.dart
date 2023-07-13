@@ -559,7 +559,7 @@ class CategoryDetails extends StatelessWidget {
                             controller.checkIfFav(products[index]);
                             Get.to(() => ItemDetails(
                                   title: '${products[index]['p_name']}',
-                                  data: products[index].data(), //!
+                                  data: products[index], //!
                                 ));
                           },
                           child: Card(

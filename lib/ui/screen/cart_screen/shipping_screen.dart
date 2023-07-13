@@ -43,34 +43,36 @@ class ShippingScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            customTextField(
-                hint: 'Address',
-                isPass: false,
-                title: 'Address',
-                controller: controller.addressController),
-            customTextField(
-                hint: 'City',
-                isPass: false,
-                title: 'City',
-                controller: controller.cityController),
-            customTextField(
-                hint: 'State',
-                isPass: false,
-                title: 'State',
-                controller: controller.stateController),
-            customTextField(
-                hint: 'Postal Code',
-                isPass: false,
-                title: 'Postal Code',
-                controller: controller.postalCodeController),
-            customTextField(
-                hint: 'Phone',
-                isPass: false,
-                title: 'Phone',
-                controller: controller.phoneController),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              customTextField(
+                  hint: 'Address',
+                  isPass: false,
+                  title: 'Address',
+                  controller: controller.addressController),
+              customTextField(
+                  hint: 'City',
+                  isPass: false,
+                  title: 'City',
+                  controller: controller.cityController),
+              customTextField(
+                  hint: 'State',
+                  isPass: false,
+                  title: 'State',
+                  controller: controller.stateController),
+              customTextField(
+                  hint: 'Postal Code',
+                  isPass: false,
+                  title: 'Postal Code',
+                  controller: controller.postalCodeController),
+              customTextField(
+                  hint: 'Phone',
+                  isPass: false,
+                  title: 'Phone',
+                  controller: controller.phoneController),
+            ],
+          ),
         ),
       ),
     );

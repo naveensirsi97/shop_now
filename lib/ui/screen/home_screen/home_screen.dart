@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart_app/constant/color_const.dart';
 import 'package:emart_app/constant/list.dart';
 import 'package:emart_app/constant/string_const.dart';
+import 'package:emart_app/services/firestore_services.dart';
+import 'package:emart_app/ui/screen/category_screen/item_details.dart';
 import 'package:emart_app/widget/featured_categoryButton.dart';
 import 'package:emart_app/widget/home_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -282,53 +286,80 @@ class HomeScreen extends StatelessWidget {
                               color: Colors.black, fontWeight: FontWeight.bold),
                         ),
                         10.heightBox,
-                        GridView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: 8,
-                          shrinkWrap: true,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  mainAxisSpacing: 8,
-                                  crossAxisSpacing: 8,
-                                  mainAxisExtent: 220),
-                          itemBuilder: (context, index) {
-                            return Card(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset(
-                                    'assets/images/tShirt.jpg',
-                                    width: 250,
-                                    fit: BoxFit.fill,
+                        StreamBuilder(
+                            stream: FirestoreServices.allProducts(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (!snapshot.hasData) {
+                                return const Center(
+                                  child: CircularProgressIndicator(
+                                    valueColor:
+                                        AlwaysStoppedAnimation(redColor),
                                   ),
-                                  const Spacer(),
-                                  const Text(
-                                    'Price 200',
-                                    style: TextStyle(
-                                        color: Colors.redAccent,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  5.heightBox,
-                                  const Text(
-                                    'Available Color : 4 ',
-                                    style: TextStyle(
-                                        color: Colors.black54,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  5.heightBox,
-                                  const Text(
-                                    'Limited Stock Hurry Up! ',
-                                    style: TextStyle(
-                                        color: Colors.blue,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  10.heightBox,
-                                ],
-                              ),
-                            );
-                          },
-                        ),
+                                );
+                              } else {
+                                var allProductData = snapshot.data!.docs;
+                                return GridView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: allProductData.length,
+                                  shrinkWrap: true,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          mainAxisSpacing: 8,
+                                          crossAxisSpacing: 8,
+                                          mainAxisExtent: 300),
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        Get.to(() => ItemDetails(
+                                              title:
+                                                  '${allProductData[index]['p_name']}',
+                                              data: allProductData[index],
+                                            ));
+                                      },
+                                      child: Card(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Image.network(
+                                              allProductData[index]['p_imgs']
+                                                  [0],
+                                              height: 200,
+                                              width: 200,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            const Spacer(),
+                                            Text(
+                                              '${allProductData[index]['p_name']}',
+                                              style: const TextStyle(
+                                                  color: Colors.redAccent,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            5.heightBox,
+                                            Text(
+                                              '${allProductData[index]['p_price']}',
+                                              style: const TextStyle(
+                                                  color: Colors.black54,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            5.heightBox,
+                                            const Text(
+                                              'Limited Stock Hurry Up! ',
+                                              style: TextStyle(
+                                                  color: Colors.blue,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            10.heightBox,
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }
+                            })
                       ],
                     ),
                   ],

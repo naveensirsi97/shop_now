@@ -23,6 +23,9 @@ class CartScreen extends StatelessWidget {
               color: redColor,
               onPressed: () {
                 Get.to(() => const ShippingScreen());
+                // if (controller.productSnapshot.isNotEmpty) {
+                //   Get.to(() => const ShippingScreen());
+                // }
               },
               title: 'Proceed To Shipping',
               textColor: Colors.white),
