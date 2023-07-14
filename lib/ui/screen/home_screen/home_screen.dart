@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart_app/constant/color_const.dart';
 import 'package:emart_app/constant/list.dart';
 import 'package:emart_app/constant/string_const.dart';
+import 'package:emart_app/controller/home_controller.dart';
 import 'package:emart_app/services/firestore_services.dart';
 import 'package:emart_app/ui/screen/category_screen/item_details.dart';
+import 'package:emart_app/ui/screen/home_screen/search_screen.dart';
 import 'package:emart_app/widget/featured_categoryButton.dart';
 import 'package:emart_app/widget/home_button.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.find<HomeController>();
+
     return Container(
       padding: const EdgeInsets.all(4.0),
       color: Colors.white,
@@ -22,10 +26,17 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
+              controller: controller.searchController,
               decoration: InputDecoration(
                   isDense: true,
                   hintText: searchAnythings,
-                  suffixIcon: const Icon(Icons.search),
+                  suffixIcon: const Icon(Icons.search).onTap(() {
+                    if (controller.searchController.text.isNotEmptyAndNotNull) {
+                      Get.to(() => SearchScreen(
+                            title: controller.searchController.text,
+                          ));
+                    }
+                  }),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -143,6 +154,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     10.heightBox,
+
+                    //Featured Category
+
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Column(
@@ -152,7 +166,6 @@ class HomeScreen extends StatelessWidget {
                             children: List.generate(
                                 3,
                                 (index) => featuredCategoryButton(
-                                      onPressed: () {},
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.1,
@@ -184,7 +197,6 @@ class HomeScreen extends StatelessWidget {
                             children: List.generate(
                                 3,
                                 (index) => featuredCategoryButton(
-                                      onPressed: () {},
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.1,
@@ -215,6 +227,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     20.heightBox,
+
+                    // Featured Product
+
                     Container(
                       padding: const EdgeInsets.all(8),
                       width: double.infinity,
@@ -234,44 +249,80 @@ class HomeScreen extends StatelessWidget {
                           10.heightBox,
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: List.generate(
-                                6,
-                                (index) => Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(horizontal: 4),
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(16)),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/mobile.jpg',
-                                        width: 150,
-                                        fit: BoxFit.fill,
+                            child: FutureBuilder(
+                                future: FirestoreServices.getFeaturedProducts(),
+                                builder: (context,
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (!snapshot.hasData) {
+                                    return const Center(
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation(redColor),
                                       ),
-                                      10.heightBox,
-                                      const Text(
-                                        'Mobile 4GB Ram/64GB Memory',
+                                    );
+                                  } else if (snapshot.data!.docs.isEmpty) {
+                                    return const Center(
+                                      child: Text(
+                                        ' No Featured Product',
                                         style: TextStyle(
-                                            color: Colors.grey,
-                                            fontWeight: FontWeight.bold),
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500),
                                       ),
-                                      10.heightBox,
-                                      const Text(
-                                        'Price 14000',
-                                        style: TextStyle(
-                                            color: Colors.redAccent,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                                    );
+                                  } else {
+                                    var featuredData = snapshot.data!.docs;
+                                    return Row(
+                                      children: List.generate(
+                                        featuredData.length,
+                                        (index) => Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 4),
+                                          padding: const EdgeInsets.all(12),
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(16)),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Image.network(
+                                                featuredData[index]['p_imgs']
+                                                    [0],
+                                                height: 150,
+                                                width: 150,
+                                                fit: BoxFit.cover,
+                                              ),
+                                              10.heightBox,
+                                              Text(
+                                                '${featuredData[index]['p_name']}',
+                                                style: const TextStyle(
+                                                    color: Colors.grey,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              10.heightBox,
+                                              Text(
+                                                "${featuredData[index]['p_price']}"
+                                                    .numCurrency,
+                                                style: const TextStyle(
+                                                    color: Colors.redAccent,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                        ).onTap(() {
+                                          Get.to(() => ItemDetails(
+                                                title:
+                                                    '${featuredData[index]['p_name']}',
+                                                data: featuredData[index],
+                                              ));
+                                        }),
+                                      ),
+                                    );
+                                  }
+                                }),
                           )
                         ],
                       ),

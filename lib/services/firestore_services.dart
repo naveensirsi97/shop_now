@@ -24,6 +24,13 @@ class FirestoreServices {
         .get();
   }
 
+  static getSubCategoryProducts(title) {
+    fireStore
+        .collection(productsCollection)
+        .where('p_subcategory', isEqualTo: title)
+        .snapshots();
+  }
+
   // static getProduct(category) {
   //   // return fireStore
   //   //     .collection(productsCollection)
@@ -110,5 +117,16 @@ class FirestoreServices {
 
   static allProducts() {
     return fireStore.collection(productsCollection).snapshots();
+  }
+
+  static getFeaturedProducts() {
+    return fireStore
+        .collection(productsCollection)
+        .where('is_featured', isEqualTo: true)
+        .get();
+  }
+
+  static searchProducts(title) {
+    return fireStore.collection(productsCollection).get();
   }
 }

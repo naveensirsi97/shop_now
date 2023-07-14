@@ -1,14 +1,19 @@
+import 'package:emart_app/ui/screen/category_screen/category_details.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget featuredCategoryButton({icon,width,height,String? title,onPressed}) {
+Widget featuredCategoryButton({icon, width, height, String? title}) {
   return InkWell(
-    onTap: onPressed,
+    onTap: () {
+      Get.to(() => CategoryDetails(title: title));
+    },
     child: Card(
       child: Container(
         width: width,
         height: height,
-        decoration: BoxDecoration(color:Colors.white30,borderRadius: BorderRadius.circular(16)),
+        decoration: BoxDecoration(
+            color: Colors.white30, borderRadius: BorderRadius.circular(16)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

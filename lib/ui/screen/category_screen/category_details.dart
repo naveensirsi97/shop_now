@@ -462,83 +462,114 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class CategoryDetails extends StatelessWidget {
+class CategoryDetails extends StatefulWidget {
   final String? title;
 
   const CategoryDetails({Key? key, required this.title}) : super(key: key);
 
   @override
+  State<CategoryDetails> createState() => _CategoryDetailsState();
+}
+
+class _CategoryDetailsState extends State<CategoryDetails> {
+  @override
+  void initState() {
+    switchCategory(widget.title);
+    super.initState();
+  }
+
+  switchCategory(title) {
+    if (controller.subcat.contains(title)) {
+      productMethod = FirestoreServices.getSubCategoryProducts(title);
+    } else {
+      productMethod = FirestoreServices.getProduct(title);
+    }
+  }
+
+  var controller = Get.find<ProductController>();
+
+  late dynamic productMethod;
+
+  @override
   Widget build(BuildContext context) {
-    var controller = Get.find<ProductController>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: redColor,
         title: Text(
-          title!,
+          widget.title!,
           style: const TextStyle(fontWeight: FontWeight.w500),
         ),
       ),
-      body: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        future: FirestoreServices.getProduct(title),
-        builder: (BuildContext context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation(Colors.red),
-              ),
-            );
-          } else if (snapshot.hasError) {
-            return const Center(
-              child: Text(
-                'Error loading products',
-                style: TextStyle(color: redColor),
-              ),
-            );
-          } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(
-              child: Text(
-                'No Products Found',
-                style: TextStyle(color: redColor),
-              ),
-            );
-          } else {
-            var products = snapshot.data!.docs;
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 40,
-                  color: redColor,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: List.generate(
-                        controller.subcat.length,
-                        (index) => Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 4, vertical: 4),
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Center(
-                            child: Text(
-                              '${controller.subcat[index]}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w300,
-                              ),
-                            ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(
+                controller.subcat.length,
+                (index) => InkWell(
+                  onTap: () {
+                    setState(() {
+                      switchCategory('${controller.subcat[index]}');
+                    });
+                  },
+                  child: Card(
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 4, vertical: 4),
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Center(
+                        child: Text(
+                          '${controller.subcat[index]}',
+                          style: const TextStyle(
+                            color: Colors.indigoAccent,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-                Expanded(
+              ),
+            ),
+          ),
+          10.heightBox,
+          FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+            future: productMethod,
+            builder: (BuildContext context,
+                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation(Colors.red),
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return const Center(
+                  child: Text(
+                    'Error loading products',
+                    style: TextStyle(color: redColor),
+                  ),
+                );
+              } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                return const Center(
+                  child: Text(
+                    'No Products Found',
+                    style: TextStyle(
+                        color: redColor,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20),
+                  ),
+                );
+              } else {
+                var products = snapshot.data!.docs;
+                return Expanded(
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: GridView.builder(
@@ -550,7 +581,7 @@ class CategoryDetails extends StatelessWidget {
                         crossAxisCount: 2,
                         mainAxisSpacing: 8,
                         crossAxisSpacing: 4,
-                        mainAxisExtent: 250,
+                        mainAxisExtent: 280,
                       ),
                       itemBuilder: (context, index) {
                         //   var product = products[index];
@@ -562,50 +593,54 @@ class CategoryDetails extends StatelessWidget {
                                   data: products[index], //!
                                 ));
                           },
-                          child: Card(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.network(
-                                  products[index]['p_imgs'][0] as String,
-                                  height: 200,
-                                  width: 200,
-                                  fit: BoxFit.cover,
-                                ),
-                                5.heightBox,
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    products[index]['p_name'] as String,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w700,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.network(
+                                    products[index]['p_imgs'][0] as String,
+                                    height: 200,
+                                    width: 200,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  5.heightBox,
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      products[index]['p_name'] as String,
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                3.heightBox,
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    '${products[index]['p_price']}'.numCurrency,
-                                    style: const TextStyle(
-                                      color: Colors.redAccent,
-                                      fontWeight: FontWeight.bold,
+                                  3.heightBox,
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      '${products[index]['p_price']}'
+                                          .numCurrency,
+                                      style: const TextStyle(
+                                        color: Colors.redAccent,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );
                       },
                     ),
                   ),
-                )
-              ],
-            );
-          }
-        },
+                );
+              }
+            },
+          ),
+        ],
       ),
     );
   }
