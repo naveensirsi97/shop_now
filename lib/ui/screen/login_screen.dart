@@ -99,9 +99,11 @@ class LoginScreen extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
                               child: controller.isLoading.value
-                                  ? const CircularProgressIndicator(
-                                      valueColor:
-                                          AlwaysStoppedAnimation(redColor),
+                                  ? const Center(
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation(redColor),
+                                      ),
                                     )
                                   : button(
                                       title: 'Log In',

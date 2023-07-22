@@ -57,9 +57,7 @@ class ItemDetails extends StatelessWidget {
                 },
                 icon: Icon(
                   Icons.favorite_outlined,
-                  color: controller.isFav.value
-                      ? Colors.orangeAccent
-                      : Colors.grey,
+                  color: controller.isFav.value ? Colors.orange : Colors.white,
                 ),
               ),
             ),
