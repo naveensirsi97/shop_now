@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       10.heightBox,
                       const Text(
-                        loginToeMart,
+                        loginToShopNow,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,

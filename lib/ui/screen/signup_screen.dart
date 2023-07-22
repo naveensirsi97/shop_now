@@ -55,7 +55,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       10.heightBox,
                       const Text(
-                        joinToeMart,
+                        joinToShopNow,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,

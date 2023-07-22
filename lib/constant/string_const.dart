@@ -1,8 +1,8 @@
-const String appName = 'eMart';
+const String appName = 'Shop Now';
 const String version = 'version 1.0.0';
 const String credit = '@Naveen Sheoran';
-const String loginToeMart = 'Log in to eMart';
-const String joinToeMart = 'Join to eMart';
+const String loginToShopNow = 'Log in to Shop Now';
+const String joinToShopNow = 'Join to Shop Now';
 const String email = 'Email';
 const String name = 'Name';
 const String emailHint = 'Please Input Email';
