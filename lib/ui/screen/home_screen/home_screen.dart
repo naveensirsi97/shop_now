@@ -33,7 +33,10 @@ class HomeScreen extends StatelessWidget {
               decoration: InputDecoration(
                   isDense: true,
                   hintText: searchAnythings,
-                  suffixIcon: const Icon(Icons.search).onTap(() {
+                  suffixIcon: const Icon(
+                    Icons.search,
+                    size: 24,
+                  ).onTap(() {
                     if (controller.searchController.text.isNotEmptyAndNotNull) {
                       Get.to(() => SearchScreen(
                             title: controller.searchController.text,
@@ -41,10 +44,10 @@ class HomeScreen extends StatelessWidget {
                     }
                   }),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   filled: true,
-                  fillColor: Colors.white60),
+                  fillColor: Colors.white),
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -284,7 +287,7 @@ class HomeScreen extends StatelessWidget {
                                           decoration: BoxDecoration(
                                               color: Colors.white,
                                               borderRadius:
-                                                  BorderRadius.circular(16)),
+                                                  BorderRadius.circular(8)),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -292,8 +295,8 @@ class HomeScreen extends StatelessWidget {
                                               Image.network(
                                                 featuredData[index]['p_imgs']
                                                     [0],
-                                                height: 150,
-                                                width: 150,
+                                                height: 250,
+                                                width: 250,
                                                 fit: BoxFit.cover,
                                               ),
                                               10.heightBox,

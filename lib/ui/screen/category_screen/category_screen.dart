@@ -35,7 +35,7 @@ class CategoryScreen extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   mainAxisSpacing: 8,
-                  crossAxisSpacing: 4,
+                  //  crossAxisSpacing: 4,
                   mainAxisExtent: 200),
               itemBuilder: (context, index) {
                 return InkWell(
@@ -51,11 +51,12 @@ class CategoryScreen extends StatelessWidget {
                       children: [
                         Image.asset(
                           categoryImageList[index],
-                          height: 160,
-                          width: 200,
-                          fit: BoxFit.fill,
+                          height: 140,
+                          width: 140,
+                          fit: BoxFit.cover,
                         ),
-                        const Spacer(),
+                        // const Spacer(),
+                        16.heightBox,
                         Align(
                           alignment: Alignment.center,
                           child: Text(

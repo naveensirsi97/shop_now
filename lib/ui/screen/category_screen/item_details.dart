@@ -84,7 +84,7 @@ class ItemDetails extends StatelessWidget {
                           return Image.network(
                             data['p_imgs'][index],
                             width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                           );
                           //  Container(
                           //   width: MediaQuery.of(context).size.width,
