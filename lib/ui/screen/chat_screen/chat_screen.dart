@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_app/constant/color_const.dart';
-import 'package:emart_app/constant/firebase_consts.dart';
-import 'package:emart_app/controller/chat_controller.dart';
-import 'package:emart_app/services/firestore_services.dart';
-import 'package:emart_app/ui/screen/chat_screen/components/sender_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_now/constant/color_const.dart';
+import 'package:shop_now/constant/firebase_consts.dart';
+import 'package:shop_now/controller/chat_controller.dart';
+import 'package:shop_now/services/firestore_services.dart';
+import 'package:shop_now/ui/screen/chat_screen/components/sender_bubble.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ChatScreen extends StatelessWidget {

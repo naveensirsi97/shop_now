@@ -1,7 +1,7 @@
-import 'package:emart_app/constant/color_const.dart';
-import 'package:emart_app/ui/screen/order_screen/components/order_place_details.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:shop_now/constant/color_const.dart';
+import 'package:shop_now/ui/screen/order_screen/components/order_place_details.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'components/order_status.dart';

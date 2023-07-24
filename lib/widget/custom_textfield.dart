@@ -1,5 +1,5 @@
-import 'package:emart_app/constant/color_const.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_now/constant/color_const.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 Widget customTextField({String? title, String? hint, isPass, controller}) {

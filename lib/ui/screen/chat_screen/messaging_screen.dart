@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_app/constant/color_const.dart';
-import 'package:emart_app/services/firestore_services.dart';
-import 'package:emart_app/ui/screen/chat_screen/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_now/constant/color_const.dart';
+import 'package:shop_now/services/firestore_services.dart';
+import 'package:shop_now/ui/screen/chat_screen/chat_screen.dart';
 
 class MessagesScreen extends StatelessWidget {
   const MessagesScreen({super.key});

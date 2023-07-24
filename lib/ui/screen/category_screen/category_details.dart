@@ -454,12 +454,12 @@
 
 //chat gpt
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_app/constant/color_const.dart';
-import 'package:emart_app/controller/product_controller.dart';
-import 'package:emart_app/services/firestore_services.dart';
-import 'package:emart_app/ui/screen/category_screen/item_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_now/constant/color_const.dart';
+import 'package:shop_now/controller/product_controller.dart';
+import 'package:shop_now/services/firestore_services.dart';
+import 'package:shop_now/ui/screen/category_screen/item_details.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CategoryDetails extends StatefulWidget {
@@ -474,7 +474,7 @@ class CategoryDetails extends StatefulWidget {
 class _CategoryDetailsState extends State<CategoryDetails> {
   @override
   void initState() {
-    switchCategory(widget.title);
+    switchCategory(widget.title!);
     super.initState();
   }
 

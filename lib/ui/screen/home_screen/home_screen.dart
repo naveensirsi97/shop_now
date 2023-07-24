@@ -1,15 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_app/constant/color_const.dart';
-import 'package:emart_app/constant/list.dart';
-import 'package:emart_app/constant/string_const.dart';
-import 'package:emart_app/controller/home_controller.dart';
-import 'package:emart_app/services/firestore_services.dart';
-import 'package:emart_app/ui/screen/category_screen/item_details.dart';
-import 'package:emart_app/ui/screen/home_screen/search_screen.dart';
-import 'package:emart_app/widget/featured_categoryButton.dart';
-import 'package:emart_app/widget/home_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_now/constant/color_const.dart';
+import 'package:shop_now/constant/list.dart';
+import 'package:shop_now/constant/string_const.dart';
+import 'package:shop_now/controller/home_controller.dart';
+import 'package:shop_now/controller/product_controller.dart';
+import 'package:shop_now/services/firestore_services.dart';
+import 'package:shop_now/ui/screen/category_screen/item_details.dart';
+import 'package:shop_now/ui/screen/home_screen/search_screen.dart';
+import 'package:shop_now/widget/featured_categoryButton.dart';
+import 'package:shop_now/widget/home_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -18,6 +19,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<HomeController>();
+    Get.put(
+        ProductController()); // it is used for featured categories product open
 
     return Container(
       padding: const EdgeInsets.all(4.0),
@@ -143,6 +146,9 @@ class HomeScreen extends StatelessWidget {
                               )),
                     ),
                     10.heightBox,
+
+                    //Featured Category
+
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -154,9 +160,6 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     10.heightBox,
-
-                    //Featured Category
-
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Column(

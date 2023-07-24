@@ -1,5 +1,5 @@
-import 'package:emart_app/constant/string_const.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shop_now/constant/string_const.dart';
 
 var socialIconList = [
   Image.asset(

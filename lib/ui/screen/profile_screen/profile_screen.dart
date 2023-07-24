@@ -1,20 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_app/constant/color_const.dart';
-import 'package:emart_app/constant/firebase_consts.dart';
-import 'package:emart_app/constant/list.dart';
-import 'package:emart_app/constant/string_const.dart';
-import 'package:emart_app/controller/auth_controller.dart';
-import 'package:emart_app/controller/profile_controller.dart';
-import 'package:emart_app/services/firestore_services.dart';
-import 'package:emart_app/ui/screen/chat_screen/messaging_screen.dart';
-import 'package:emart_app/ui/screen/login_screen.dart';
-import 'package:emart_app/ui/screen/order_screen/order_screen.dart';
-import 'package:emart_app/ui/screen/profile_screen/edit_profile.dart';
-import 'package:emart_app/ui/screen/wishList_screen/wishList_screen.dart';
-import 'package:emart_app/widget/profile_button.dart';
-import 'package:emart_app/widget/profile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_now/constant/color_const.dart';
+import 'package:shop_now/constant/firebase_consts.dart';
+import 'package:shop_now/constant/list.dart';
+import 'package:shop_now/constant/string_const.dart';
+import 'package:shop_now/controller/auth_controller.dart';
+import 'package:shop_now/controller/profile_controller.dart';
+import 'package:shop_now/services/firestore_services.dart';
+import 'package:shop_now/ui/screen/chat_screen/messaging_screen.dart';
+import 'package:shop_now/ui/screen/login_screen.dart';
+import 'package:shop_now/ui/screen/order_screen/order_screen.dart';
+import 'package:shop_now/ui/screen/profile_screen/edit_profile.dart';
+import 'package:shop_now/ui/screen/wishList_screen/wishList_screen.dart';
+import 'package:shop_now/widget/profile_button.dart';
+import 'package:shop_now/widget/profile_card.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProfileScreen extends StatelessWidget {

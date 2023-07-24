@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_app/constant/firebase_consts.dart';
-import 'package:emart_app/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_now/constant/firebase_consts.dart';
+import 'package:shop_now/controller/home_controller.dart';
 
 class CartController extends GetxController {
   var totalP = 0.obs;
@@ -19,6 +19,7 @@ class CartController extends GetxController {
 
   late dynamic productSnapshot;
   var products = [];
+  var vendors = [];
 
   var placingOrder = false.obs;
 
@@ -55,13 +56,15 @@ class CartController extends GetxController {
       'order_delivered': false,
       'order_on_delivery': false,
       'total_amount': totalAmount,
-      'orders': FieldValue.arrayUnion(products)
+      'orders': FieldValue.arrayUnion(products),
+      'vendors': FieldValue.arrayUnion(vendors)
     });
     placingOrder(false);
   }
 
   getProductDetails() {
     products.clear();
+    vendors.clear();
     for (var i = 0; i < productSnapshot.length; i++) {
       products.add({
         'color': productSnapshot[i]['color'],
@@ -71,6 +74,7 @@ class CartController extends GetxController {
         'qty': productSnapshot[i]['qty'],
         'title': productSnapshot[i]['title'],
       });
+      vendors.add(productSnapshot[i]['vendor_id']);
     }
   }
 

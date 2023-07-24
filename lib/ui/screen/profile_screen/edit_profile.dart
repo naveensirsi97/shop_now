@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:emart_app/constant/color_const.dart';
-import 'package:emart_app/constant/string_const.dart';
-import 'package:emart_app/controller/profile_controller.dart';
-import 'package:emart_app/widget/button.dart';
-import 'package:emart_app/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_now/constant/color_const.dart';
+import 'package:shop_now/constant/string_const.dart';
+import 'package:shop_now/controller/profile_controller.dart';
+import 'package:shop_now/widget/button.dart';
+import 'package:shop_now/widget/custom_textfield.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class EditProfile extends StatelessWidget {

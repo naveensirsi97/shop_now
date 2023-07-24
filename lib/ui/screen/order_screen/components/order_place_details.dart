@@ -1,5 +1,5 @@
-import 'package:emart_app/constant/color_const.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shop_now/constant/color_const.dart';
 
 Widget orderPlaceDetails({title1, title2, d1, d2}) {
   return Padding(

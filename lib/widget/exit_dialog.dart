@@ -1,7 +1,7 @@
-import 'package:emart_app/constant/color_const.dart';
-import 'package:emart_app/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shop_now/constant/color_const.dart';
+import 'package:shop_now/widget/button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 Widget exitDialog(context) {

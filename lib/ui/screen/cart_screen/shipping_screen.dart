@@ -1,10 +1,10 @@
-import 'package:emart_app/constant/color_const.dart';
-import 'package:emart_app/controller/cart_controller.dart';
-import 'package:emart_app/ui/screen/cart_screen/payment_method.dart';
-import 'package:emart_app/widget/button.dart';
-import 'package:emart_app/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_now/constant/color_const.dart';
+import 'package:shop_now/controller/cart_controller.dart';
+import 'package:shop_now/ui/screen/cart_screen/payment_method.dart';
+import 'package:shop_now/widget/button.dart';
+import 'package:shop_now/widget/custom_textfield.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ShippingScreen extends StatelessWidget {

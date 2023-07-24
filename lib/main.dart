@@ -1,8 +1,8 @@
-import 'package:emart_app/constant/string_const.dart';
-import 'package:emart_app/ui/screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:shop_now/constant/string_const.dart';
+import 'package:shop_now/ui/screen/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

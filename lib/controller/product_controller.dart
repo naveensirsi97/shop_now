@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_app/constant/firebase_consts.dart';
-import 'package:emart_app/model/category_model.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:shop_now/constant/firebase_consts.dart';
+import 'package:shop_now/model/category_model.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProductController extends GetxController {

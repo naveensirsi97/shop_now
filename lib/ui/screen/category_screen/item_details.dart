@@ -1,10 +1,10 @@
-import 'package:emart_app/constant/color_const.dart';
-import 'package:emart_app/constant/list.dart';
-import 'package:emart_app/controller/product_controller.dart';
-import 'package:emart_app/ui/screen/chat_screen/chat_screen.dart';
-import 'package:emart_app/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shop_now/constant/color_const.dart';
+import 'package:shop_now/constant/list.dart';
+import 'package:shop_now/controller/product_controller.dart';
+import 'package:shop_now/ui/screen/chat_screen/chat_screen.dart';
+import 'package:shop_now/widget/button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ItemDetails extends StatelessWidget {

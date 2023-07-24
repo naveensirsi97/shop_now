@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_app/constant/firebase_consts.dart';
+import 'package:shop_now/constant/firebase_consts.dart';
 
 class FirestoreServices {
   // get users data
@@ -27,7 +27,7 @@ class FirestoreServices {
   static getSubCategoryProducts(title) {
     fireStore
         .collection(productsCollection)
-        .where('p_subcategory', isEqualTo: title)
+        .where('p_sabcategory', isEqualTo: title)
         .snapshots();
   }
 

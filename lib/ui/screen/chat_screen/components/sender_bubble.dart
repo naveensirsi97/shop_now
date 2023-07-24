@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_app/constant/firebase_consts.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:shop_now/constant/firebase_consts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 Widget senderBubble(DocumentSnapshot data) {
